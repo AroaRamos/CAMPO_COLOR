@@ -1,0 +1,46 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Formulario</title>
+      
+    </head>
+    <body>
+      <h2>Electrónica Bosco</h2>
+      <form id="formColor">
+        <label for="producto">Selecciona un producto:</label>
+        <select name="producto" id="producto">
+          <option value="">Elija producto</option>
+          <option value="movil">Móvil</option>
+          <option value="tablet">Tablet</option>
+        </select>
+    
+        <br><br>
+    
+        <label for="color">Selecciona un color:</label>
+        <input type="color" id="color" disabled="disabled">
+    
+        <br><br>
+    
+        <button type="submit">Enviar</button>
+      </form>
+
+      <script>
+        document.getElementById("producto").addEventListener("change", muestraColor);
+
+        function muestraColor() {
+          let producto = document.getElementById("producto").value;
+          const color = document.getElementById("color");
+    
+          if (producto == "movil") {
+            color.removeAttribute("disabled");
+          } else {
+            color.setAttribute("disabled", "");
+          }
+        }
+
+      </script>
+    </body>
+    </html>
