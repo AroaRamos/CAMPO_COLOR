@@ -5,11 +5,16 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Formulario</title>
+      <style>
+        #label-provincia{
+          visibility: hidden;
+        }
+      </style>
       
     </head>
     <body>
       <h2>Electrónica Bosco</h2>
-      <form id="formColor">
+      <form id="formColor" action="procesa.php" onsubmit="return validaFormulario()">
         <label for="producto">Selecciona un producto:</label>
         <select name="producto" id="producto">
           <option value="">Elija producto</option>
@@ -23,12 +28,35 @@
         <input type="color" id="color" disabled="disabled">
     
         <br><br>
+
+        <label for="pais">Elija destino:</label>
+        <select name="pais" id="pais">
+          <option value="">Selecciona un destino</option>
+          <option value="esp">España</option>
+          <option value="fEsp">Fuera de España</option>
+        </select>
+
+        <br><br>
+
+        <label id="label-provincia">Elija provincia:
+          <select name="provincia" id="provincia">
+            <option value="">Selecciona una provincia</option>
+            <option value="alb">Albacete</option>
+            <option value="cue">Cuenca</option>
+            <option value="tol">Toledo</option>
+            <option value="ciu">Ciudad Real</option>
+            <option value="gua">Guadalajara</option>
+          </select>
+        </label>
+
+        <br><br>
     
-        <button type="submit">Enviar</button>
+        <input type="submit" value="Enviar">
       </form>
 
       <script>
         document.getElementById("producto").addEventListener("change", muestraColor);
+        document.getElementById("pais").addEventListener("change", muestraProvincia);
 
         function muestraColor() {
           let producto = document.getElementById("producto").value;
@@ -40,6 +68,29 @@
             color.setAttribute("disabled", "");
           }
         }
+
+        function muestraProvincia(){
+          if(document.querySelector("#pais").value === "esp"){
+            document.querySelector("#label-provincia").style.visibility = "visible";
+          }else{
+            document.querySelector("#label-provincia").style.visibility = "hidden";
+          }
+          
+        }
+
+        function validaFormulario(){
+          if(document.getElementById("pais").value === ""){
+            alert("Debe elegir una opción");
+            return false;
+          }
+
+          if(document.getElementById("pais").value === "esp" && 
+             document.getElementById("label-provincia").value === ""){
+            alert("Debe elegir una opción");
+            return false;
+          }
+          return true;
+        }  
 
       </script>
     </body>
